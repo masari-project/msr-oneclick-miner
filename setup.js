@@ -1,6 +1,7 @@
 "use strict"
 
 var fs = require('fs');
+const electron = require('electron');
 
 exports.writeConfigTxt = function() {
     var configText = "\"call_timeout\" : 10, \"retry_time\" : 30, \"giveup_limit\" : 0, \"verbose_level\" : 3, \"print_motd\" : true, \"h_print_time\" : 60, \"aes_override\" : null, \"use_slow_memory\" : \"warn\", \"tls_secure_algo\" : true, \"daemon_mode\" : false, \"flush_stdout\" : false, \"output_file\" : \"\", \"httpd_port\" : 0, \"http_login\" : \"\", \"http_pass\" : \"\", \"prefer_ipv4\" : true,"
@@ -24,4 +25,12 @@ exports.doConfigsExist = function() {
     else {
       return true;
     }
+}
+
+exports.openSetupWindow = function() {
+    const BrowserWindow = electron.remote.BrowserWindow;
+    let win = new BrowserWindow({width:400, height: 450});
+    win.on('close', function() { win = null });
+    win.loadFile('setup.html');
+    win.show();
 }

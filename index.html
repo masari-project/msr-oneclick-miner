@@ -16,15 +16,10 @@
 
     <script>
       require('./renderer.js')
-      const electron = require('electron')
       const setup = require('./setup.js')
 
       if(!setup.doConfigsExist()) {
-        const BrowserWindow = electron.remote.BrowserWindow;
-        let win = new BrowserWindow({width:400, height: 450});
-        win.on('close', function() { win = null });
-        win.loadFile('setup.html');
-        win.show();
+        setup.openSetupWindow();
       }  
       
       var child;
