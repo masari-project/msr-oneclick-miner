@@ -30,7 +30,7 @@ exports.doConfigsExist = function() {
 
 exports.openSetupWindow = function() {
     const BrowserWindow = electron.remote.BrowserWindow;
-    let win = new BrowserWindow({width:400, height: 450});
+    let win = new BrowserWindow({width:400, height: 450, frame: false, backgroundColor: '#1c222e'});
     win.on('close', function() { win = null });
     win.loadFile('setup.html');
     win.show();
