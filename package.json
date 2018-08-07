@@ -1,0 +1,19 @@
+{
+  "name": "Masari-OneClick",
+  "version": "0.0.1",
+  "description": "A one click miner for Masari",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "",
+  "keywords": [
+    "Masari",
+    "cryptocurrency"
+  ],
+  "author": "Masari Core Team",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^2.0.0"
+  }
+}

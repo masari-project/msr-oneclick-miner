@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Masari Miner</title>
+  </head>
+  <body>
+    <h1>Masari One Click Miner</h1>
+
+    <div align=center>
+      <button type="button" onClick="startMining()">Mine!</button>
+    </div>
+
+    <script>
+      require('./renderer.js')
+      const electron = require('electron')
+
+      var fs = require('fs');
+
+      if(!fs.existsSync('pools.txt')) {
+        const BrowserWindow = electron.remote.BrowserWindow;
+        let win = new BrowserWindow({width:400, height: 450});
+        win.on('close', function() { win = null });
+        win.loadFile('setup.html');
+        win.show();
+      }  
+      function startMining() {
+        var childProcess = require('child_process');
+        var child = childProcess.spawn('./xmr-stak');
+      }
+    </script>
+  </body>
+</html>

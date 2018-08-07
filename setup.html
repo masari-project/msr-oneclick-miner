@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Setup</title>
+  </head>
+  <body>
+    <div align=center>
+       <h3>Enter Your Masari Address</h3>
+      <input type="text" id="address">
+    </div>
+
+    <div align=center>
+      <h3>Select A Pool</h3>
+      <button type="button" onClick="masaricoin()">masaricoin.com</button>
+      <button type="button" onClick="optimusblue()">msr.optimusblue.com</button>
+    </div>
+
+     <button type="button" onClick="finish()">Finish</button>
+    <script>
+      require('./renderer.js')
+      var fs = require('fs')
+      const electron = require('electron')
+      const childProcess = require('child_process');
+
+      let pool;
+
+      function masaricoin() {
+        pool = "pool.masaricoin.com:3333";
+      }
+
+      function optimusblue() {
+        pool = "msr.optimusblue.com:3333"
+      }
+
+      function finish() {
+        var address = document.getElementById('address').value
+        var configText = "\"pool_list\" :[ {\"pool_address\" : \"" + pool + "\", \"wallet_address\" : \"" + address + "\", \"rig_id\" : \"oneclick\", \"pool_password\" : \"x\", \"use_nicehash\" : false, \"use_tls\" : false, \"tls_fingerprint\" : \"\", \"pool_weight\" : 1 }, ], \"currency\" : \"masari\","
+        fs.writeFile("pools.txt", configText, function(e) {
+          if(e) {
+            return console.log(e);
+          }
+        });
+        var thisWindow = electron.remote.getCurrentWindow();
+        setTimeout( function () { thisWindow.close() } , 500);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+# Masari OneClick Miner
