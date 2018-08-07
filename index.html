@@ -7,8 +7,11 @@
   <body>
     <h1>Masari One Click Miner</h1>
 
-    <div align=center>
-      <button type="button" onClick="startMining()">Mine!</button>
+    <div align=center style="padding-top: 25px">
+      <button type="button" onClick="startMining()">Start Mining!</button>
+    </div>
+    <div align=center style="padding-top: 10px">
+      <button type="button" onClick="stopMining()">Stop Mining</button>
     </div>
 
     <script>
@@ -24,14 +27,21 @@
         win.loadFile('setup.html');
         win.show();
       }  
+      
+      var child;
+
       function startMining() {
         var childProcess = require('child_process');
         if (process.platform === "win32") {
-          var child = childProcess.spawn('msr-stak.exe');
+          child = childProcess.spawn('msr-stak.exe');
         }
         else {
-          var child = childProcess.spawn('./msr-stak');
+          child = childProcess.spawn('./msr-stak');
         }
+      }
+
+      function stopMining() {
+        child.kill();
       }
     </script>
   </body>
