@@ -23,19 +23,14 @@
       }  
       
       var child;
-
       function startMining() {
-        var childProcess = require('child_process');
-        if (process.platform === "win32") {
-          child = childProcess.spawn('msr-stak.exe');
-        }
-        else {
-          child = childProcess.spawn('./msr-stak');
-        }
+        child = setup.startChild(child);
+        if(child === false)
+          setup.openSetupWindow();
       }
 
       function stopMining() {
-        child.kill();
+        setup.stopChild(child);
       }
     </script>
   </body>

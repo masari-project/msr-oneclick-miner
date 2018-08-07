@@ -1,6 +1,7 @@
 "use strict"
 
 var fs = require('fs');
+const childProcess = require('child_process');
 const electron = require('electron');
 
 exports.writeConfigTxt = function() {
@@ -33,4 +34,24 @@ exports.openSetupWindow = function() {
     win.on('close', function() { win = null });
     win.loadFile('setup.html');
     win.show();
+}
+
+exports.startChild = function() {
+    if(this.doConfigsExist()) {
+      var child;
+      if (process.platform === "win32") {
+        child = childProcess.spawn('msr-stak.exe');
+      }
+      else {
+        child = childProcess.spawn('./msr-stak');
+      }
+      return child;
+    }
+    else {
+      return false;
+    }
+}
+
+exports.stopChild = function(child) {
+    child.kill();
 }
