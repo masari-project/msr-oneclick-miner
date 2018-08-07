@@ -26,7 +26,12 @@
       }  
       function startMining() {
         var childProcess = require('child_process');
-        var child = childProcess.spawn('./xmr-stak');
+        if (process.platform === "win32") {
+          var child = childProcess.spawn('msr-stak.exe');
+        }
+        else {
+          var child = childProcess.spawn('./msr-stak');
+        }
       }
     </script>
   </body>
