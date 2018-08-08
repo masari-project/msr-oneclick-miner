@@ -7,6 +7,10 @@
   <body>
     <h1>Masari One Click Miner</h1>
 
+    <div align=center style="padding-top: 10px">
+      <h2 id="hashRate">Hashrate: 0 H/s</h2>
+    </div>
+
     <div align=center style="padding-top: 25px">
       <button type="button" onClick="startMining()">Start Mining!</button>
     </div>
@@ -17,6 +21,7 @@
     <script>
       require('./renderer.js')
       const setup = require('./setup.js')
+      const stats = require('./stats.js')
 
       if(!setup.doConfigsExist()) {
         setup.openSetupWindow();
@@ -32,6 +37,14 @@
       function stopMining() {
         setup.stopChild(child);
       }
+
+      function updateHashRate() {
+        var hashRate = stats.get10SecHashRate();
+        document.getElementById('hashRate').innerHTML = "Hashrate: " + hashRate + " H/s";
+      }
+
+      setInterval(updateHashRate, 2000);
+
     </script>
   </body>
 </html>
