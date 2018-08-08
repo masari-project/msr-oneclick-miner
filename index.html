@@ -28,22 +28,27 @@
       }  
       
       var child;
+      var interval;
+
+      function updateHashRate() {
+        var hashRate = stats.get10SecHashRate();
+        if(!child)
+          hashRate = 0;
+        document.getElementById('hashRate').innerHTML = "Hashrate: " + hashRate + " H/s";
+      }
+
       function startMining() {
-        child = setup.startChild(child);
+        child = setup.startChild();
         if(child === false)
           setup.openSetupWindow();
+        interval = setInterval(updateHashRate, 2000);
       }
 
       function stopMining() {
         setup.stopChild(child);
+        document.getElementById('hashRate').innerHTML = "Hashrate: 0 H/s";
+        clearInterval(interval);
       }
-
-      function updateHashRate() {
-        var hashRate = stats.get10SecHashRate();
-        document.getElementById('hashRate').innerHTML = "Hashrate: " + hashRate + " H/s";
-      }
-
-      setInterval(updateHashRate, 2000);
 
     </script>
   </body>

@@ -13,7 +13,7 @@ function normalizeHashrate(value, unit) {
 
 exports.get10SecHashRate = function () {
 
-  var fileData = fs.readFileSync('stak.txt', 'utf8');
+  var fileData = fs.readFileSync('stak-output.txt', 'utf8');
 
   var explodedLog = fileData.split('\n');
   var hashrateCpu10 = 0;
