@@ -1,7 +1,7 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow} = require('electron');
 
-let mainWindow
+let mainWindow;
 
 function createWindow () {
   // Create the browser window.
@@ -14,7 +14,7 @@ function createWindow () {
   })
 }
 
-app.on('ready', createWindow)
+app.on('ready', createWindow);
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
@@ -23,7 +23,7 @@ app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') {
     app.quit()
   }
-})
+});
 
 app.on('activate', function () {
   // On OS X it's common to re-create a window in the app when the
@@ -31,4 +31,4 @@ app.on('activate', function () {
   if (mainWindow === null) {
     createWindow()
   }
-})
+});

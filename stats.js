@@ -47,4 +47,4 @@ exports.get10SecHashRate = function () {
     }
   }
   return hashrateCpu10;
-}
+};
