@@ -7,7 +7,7 @@ function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600})
 
-  mainWindow.loadFile('index.html');
+  mainWindow.loadFile('views/index.html');
 
   mainWindow.on('closed', function () {
     mainWindow = null

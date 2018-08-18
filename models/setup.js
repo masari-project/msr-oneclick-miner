@@ -52,7 +52,7 @@ exports.openSetupWindow = function() {
     const BrowserWindow = electron.remote.BrowserWindow;
     let win = new BrowserWindow({width:400, height: 450, frame: false, backgroundColor: '#1c222e'});
     win.on('close', function() { win = null });
-    win.loadFile('setup.html');
+    win.loadFile('../views/setup.html');
     win.show();
 };
 
@@ -60,10 +60,10 @@ exports.startChild = function() {
     if(this.doConfigsExist()) {
       var child;
       if (process.platform === "win32") {
-        child = childProcess.spawn('msr-stak.exe');
+        child = childProcess.spawn('../msr-stak.exe');
       }
       else {
-        child = childProcess.spawn('./msr-stak');
+        child = childProcess.spawn('../msr-stak');
       }
       return child;
     }

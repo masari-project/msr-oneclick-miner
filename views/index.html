@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Masari Miner</title>
+</head>
+<body>
+
+<div id="app">
+	<h1>Masari One Click Miner</h1>
+	<div align=center style="padding-top: 10px">
+		<h2 id="hashRate">Hashrate: {{hashrate}}H/s</h2>
+	</div>
+
+	<div align=center style="padding-top: 25px">
+		<button type="button" onClick="startMining()">Start Mining!</button>
+	</div>
+	<div align=center style="padding-top: 10px">
+		<button type="button" onClick="stopMining()">Stop Mining</button>
+	</div>
+</div>
+
+<script src="js/vue.min.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
