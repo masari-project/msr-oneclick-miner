@@ -1,9 +1,11 @@
 {
-  "name": "Masari-OneClick",
+  "name": "masarioneclickminer",
   "version": "0.0.1",
   "description": "A one click miner for Masari",
   "main": "main.js",
   "scripts": {
+    "build": "npm run build && tsc",
+    "watch": "tsc -w",
     "start": "electron ."
   },
   "repository": "https://github.com/masari-project/msr-oneclick-miner.git",
@@ -16,6 +18,12 @@
   "author": "Masari Core Team",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^2.0.0"
+    "electron": "^2.0.2",
+    "electron-packager": "^12.1.1",
+    "tslint": "^5.10.0",
+    "typescript": "^2.9.1"
+  },
+  "dependencies": {
+    "open": "0.0.5"
   }
 }

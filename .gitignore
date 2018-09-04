@@ -7,3 +7,10 @@ config.txt
 cpu.txt
 nvidia.txt
 pools.txt
+stak-output.txt
+
+msr-stak.exe
+msr-stak
+*.dll
+
+masarioneclickminer-*

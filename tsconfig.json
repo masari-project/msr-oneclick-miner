@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target":"es5",
+        "noImplicitAny": true,
+        "sourceMap": true,
+        "lib": ["ES5","DOM", "es2015"],
+        "baseUrl": ".",
+        "strict":true,
+        "experimentalDecorators": true,
+        "paths": {
+            "*": ["node_modules/*"]
+        }
+    }
+}

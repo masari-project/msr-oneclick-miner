@@ -1,0 +1,351 @@
+/*
+ * Copyright (c) 2018, Gnock
+ * Copyright (c) 2018, The Masari Project
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+ *
+ * 3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+body,html{margin:0;padding:0;min-height:100%;overflow-x:hidden}
+div,p,input,label{box-sizing: border-box;}
+
+*[v-cloak] {
+	display: none;
+}
+*{
+	transition: all 0.2s ease-out;
+}
+
+body{
+	overflow-y: hidden;
+	font-weight: normal;
+	background: #f7f7f7;
+}
+
+a{
+	color: white;
+}
+
+
+/*=================BUTTONS====================*/
+.btn{
+	text-decoration: none;
+	background:#e0e1e2 none;
+	cursor: pointer;
+	color: rgba(0,0,0,.6);
+	border: none;
+	display: inline-block;
+	font-weight: 400;
+	letter-spacing: .05em;
+	margin-top: .5rem;
+	margin-bottom: 0;
+	text-align: center;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	vertical-align: middle;
+	font-size: 1.07rem;
+	line-height: 1.4;
+	border-radius: .28571429rem;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-transition: all .25s ease;
+	-o-transition: all ease .25s;
+	transition: all .25s ease;
+	padding: .78571429em 1.5em .78571429em;
+}
+.btn.basic{background:none;color:#e0e1e2;border:2px solid #e0e1e2;}
+.btn.basic:hover{background:none !important;color:#e0e1e2;border:2px solid #e0e1e2;}
+.btn:hover{background-color: #cacbcd;color: rgba(0,0,0,.8);}
+
+.btn.primary{color: #fff;background-color: #2185d0;}
+.btn.primary.basic{color: #2185d0;border-color: #2185d0;}
+.btn.primary:hover {background-color: #1678c2;}
+.btn.primary.basic:hover{color: #1678c2;border-color: #1678c2;}
+
+.btn.teal{background-color: #00b5ad;color: #fff;}
+.btn.teal:hover{background-color: #009c95;color: #fff;}
+
+.btn.green{background-color: #4cb860;color: #fff;}
+.btn.green:hover{background-color: #499c4e;color: #fff;}
+
+.btn:disabled,.btn.disabled{
+	cursor: default;
+	opacity: .45!important;
+	background-image: none!important;
+	-webkit-box-shadow: none!important;
+	box-shadow: none!important;
+	pointer-events: none!important;
+}
+
+.btn.mini{font-size: .78571429rem;}
+.btn.tiny{font-size: .85714286rem;}
+.btn.small{font-size: .92857143rem;}
+.btn.medium{font-size: 1rem;}
+.btn.large{font-size: 1.14285714rem;}
+.btn.big{font-size: 1.28571429rem;}
+.btn.huge{font-size: 1.42857143rem;}
+.btn.massive{font-size: 1.71428571rem;}
+
+
+/*==================FORMS===================*/
+.field{
+	margin-bottom:15px;
+	position: relative;
+}
+.field label {
+	display: block;
+	font-weight: 400;
+	margin-bottom:5px;
+}
+.field input, .field .subfield, .field select{
+	border: 1px solid #D9DCE7;
+	border-radius: 5px;
+	font-size: 14px;
+	padding: 17px 16px 15px;
+	width: 100%;
+	color: rgba(71, 78, 93, 0.7);
+	background: #FFFFFF;
+}
+
+.field input:read-only, .field input.readonly, .field .subfield.readonly{
+	background:#f8f8f9;
+}
+
+.field input[type=checkbox],
+.field input[type=radio]{
+	width: auto;
+}
+.field .subfield{
+	padding: 0;
+}
+.field .subfield input{
+	width: calc(100% - 41px);
+	border:none;
+	padding: 5px;
+	display: inline-block;
+}
+.field .subfield input.twoActions {
+	width: calc(100% - 82px);
+}
+
+.field .subfield .action{
+	width: 20px;
+	border-left:1px solid #D9DCE7;
+	padding: 18px 8px;
+	display: inline-block;
+	height: 100%;
+}
+
+.field.checkbox input{
+	position: absolute;
+	opacity: 0;
+	z-index: 8;
+	width: 3.5rem;
+	height: 1.5rem;
+}
+.field.checkbox label{
+	margin-left:70px;
+}
+.field.checkbox label:before{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 17px;
+	height: 17px;
+	content: '';
+	background: #fff;
+	border-radius: .21428571rem;
+	-webkit-transition: border .1s ease,opacity .1s ease,-webkit-transform .1s ease,-webkit-box-shadow .1s ease;
+	transition: border .1s ease,opacity .1s ease,-webkit-transform .1s ease,-webkit-box-shadow .1s ease;
+	transition: border .1s ease,opacity .1s ease,transform .1s ease,box-shadow .1s ease;
+	transition: border .1s ease,opacity .1s ease,transform .1s ease,box-shadow .1s ease,-webkit-transform .1s ease,-webkit-box-shadow .1s ease;
+	border: 1px solid #d4d4d5;
+
+	display: block;
+	position: absolute;
+	content: '';
+	z-index: 1;
+	-webkit-transform: none;
+	transform: none;
+	border: none;
+	top: 0;
+	background: rgba(0,0,0,.05);
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	width: 3.5rem;
+	height: 1.5rem;
+	border-radius: 500rem;
+}
+.field.checkbox input:checked~label:before{
+	background-color: #2185d0;
+}
+.field.checkbox label:after{
+	background: #fff -webkit-gradient(linear,left top,left bottom,from(transparent),to(rgba(0,0,0,.05)));
+	background: #fff -webkit-linear-gradient(transparent,rgba(0,0,0,.05));
+	background: #fff linear-gradient(transparent,rgba(0,0,0,.05));
+	position: absolute;
+	content: ''!important;
+	opacity: 1;
+	z-index: 2;
+	border: none;
+	-webkit-box-shadow: 0 1px 2px 0 rgba(34,36,38,.15), 0 0 0 1px rgba(34,36,38,.15) inset;
+	box-shadow: 0 1px 2px 0 rgba(34,36,38,.15), 0 0 0 1px rgba(34,36,38,.15) inset;
+	width: 1.5rem;
+	height: 1.5rem;
+	top: 0;
+	left: 0;
+	border-radius: 500rem;
+	-webkit-transition: background .3s ease,left .3s ease;
+	transition: background .3s ease,left .3s ease;
+}
+.field.checkbox input:checked~label:after{
+	left: 2.15rem;
+}
+
+
+/*===================TEXT=================*/
+.center,.tc{text-align:center}
+.left,.tl{text-align:left}
+.right,.tr{text-align:right}
+.clearBoth,.cb{clear:both;}
+
+.text.loader{
+	min-width: 2.28571429rem;
+	padding-top: 3.07142857rem;
+	position: relative;
+	display: inline-block;
+	margin: 0;
+	text-align: center;
+	z-index: 1000;
+}
+.text.loader:after, .text.loader:before {
+	width: 2.28571429rem;
+	height: 2.28571429rem;
+	margin: 0 0 0 -1.14285714rem;
+}
+.text.loader:before{
+	position: absolute;
+	content: '';
+	top: 0;
+	left: 50%;
+	border-radius: 500rem;
+	border: .2em solid rgba(0,0,0,.1);
+}
+.text.loader:after{
+	border-color: #767676 transparent transparent;
+	position: absolute;
+	content: '';
+	top: 0;
+	left: 50%;
+	-webkit-animation: loader .6s linear;
+	animation: loader .6s linear;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+	border-radius: 500rem;
+	border-color: #767676 transparent transparent;
+	border-style: solid;
+	border-width: .2em;
+	-webkit-box-shadow: 0 0 0 1px transparent;
+	box-shadow: 0 0 0 1px transparent;
+
+	width: 2.28571429rem;
+	height: 2.28571429rem;
+	margin: 0 0 0 -1.14285714rem;
+}
+@-webkit-keyframes loader{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}
+@keyframes loader{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}
+
+/*===================PROGRESS=================*/
+.progress{
+	height:24px;
+	border-radius: .28571429rem;
+	position: relative;
+	display: block;
+	max-width: 100%;
+	background: rgba(0,0,0,.1);
+	margin-bottom:1.5rem;
+	text-align: center;
+}
+.progress .bar{
+	display: block;
+	position: relative;
+	width: 0;
+	min-width: 2em;
+	background: #888;
+	border-radius: .28571429rem;
+	-webkit-transition: width .1s ease,background-color .1s ease;
+	transition: width .1s ease,background-color .1s ease;
+	height:24px;line-height:24px;
+	color:white;
+}
+.progress .label{
+	display: block;
+}
+
+/*===================ONE CLICK MINER=================*/
+body{
+	background: #36393f;
+	color:white;
+}
+
+.stats .row{
+	margin-bottom:30px;
+	text-align: center;
+}
+.stats .stat{
+	display: inline-block;
+	width: 32%;
+	text-align: center;
+}
+.stats .stat .value{
+	background: #146DBD;
+	display: inline-block;
+	padding: 10px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+.stats .stat .value.big{
+	min-width: 70%;
+}
+
+#app{
+	padding:30px;
+}
+#app h1{
+	text-align: center;
+	display: block;
+}
+#app .header{
+	text-align: center;
+}
+#app .header img{
+	max-height: 40px;
+}
+
+.usefulLinks{
+	margin-top:60px;
+	text-align: center;
+}
+.usefulLinks a{
+	display: inline-block;
+	margin-right:20px;
+}
+
+.copyright{
+	margin-top:10px;
+	text-align: center;
+}
+
+.info{
+	text-align: right;
+}

@@ -2,25 +2,99 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Masari Miner</title>
+	<title>Masari OneClick Miner</title>
+
+	<link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
 
-<div id="app">
-	<h1>Masari One Click Miner</h1>
-	<div align=center style="padding-top: 10px">
-		<h2 id="hashRate">Hashrate: {{hashrate}}H/s</h2>
+<div id="app" v-cloak="">
+	<div class="header" >
+		<div>
+			<img src="imgs/logo_white.png" alt="Masari"/>
+		</div>
+		<h1>One Click Miner</h1>
 	</div>
 
-	<div align=center style="padding-top: 25px">
-		<button type="button" onClick="startMining()">Start Mining!</button>
+	<div class="config">
+		<div class="address field" >
+			<label for="wallet">Your Masari Address</label>
+			<input v-model="wallet" id="wallet"/>
+			<div v-if="!validWallet" >Invalid address</div>
+			<div class="info" v-if="wallet === defaultWallet">
+				Don't have a wallet yet ? <a href="https://www.masariwallet.com/#!createWallet" @click="openExternalLink($event)">Obtain one easely</a>
+			</div>
+		</div>
+		<div class="field">
+			<label>The pool on which to mine</label>
+			<select v-model="currentPoolMiningAddress" >
+				<option v-for="pool in pools" :value="pool.miningAddress">{{pool.name}}</option>
+			</select>
+			<div class="info" v-if="getMiningPool() !== null"><a :href="getMiningPool().websiteUrl" @click="openExternalLink($event)">See pool website</a></div>
+		</div>
 	</div>
-	<div align=center style="padding-top: 10px">
-		<button type="button" onClick="stopMining()">Stop Mining</button>
+
+	<div class="stats">
+		<div class="row" >
+			<div class="stat">
+				<div class="text" >Speed</div>
+				<div class="value big" >{{hashrate}} H/s</div>
+			</div>
+			<div class="stat">
+				<div class="text" >Shares</div>
+				<div class="value" >{{shares}}</div>
+			</div>
+			<div class="stat">
+				<div class="text" >Estimated 24h</div>
+				<div class="value big" >{{earnings24H | piconero}} MSR</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="stat"><div class="text" >Unpaid</div><div class="value big" >{{amountDue  | piconero}} MSR</div></div>
+			<div class="stat"><div class="text" >All time</div><div class="value big" >{{totalPaid | piconero}} MSR</div></div>
+		</div>
+		<div class="row">
+			<div class="stat"><div class="text" >Price in BTC</div><div class="value big" >{{priceBtc}}</div></div>
+			<div class="stat"><div class="text" >Price in USD</div><div class="value big" >{{priceUsd}}</div></div>
+			<div class="stat"><div class="text" >Price in EUR</div><div class="value big" >{{priceEur}}</div></div>
+		</div>
 	</div>
+
+	<div class="actions" >
+		<div align=center style="padding-top: 25px">
+			<button type="button" @click="startMining()" v-if="!isMining" :disabled="!validWallet" class="btn">Start Mining!</button>
+		</div>
+		<div align=center style="padding-top: 10px">
+			<button type="button" @click="stopMining()" v-if="isMining" class="btn">Stop Mining</button>
+		</div>
+	</div>
+
+	<div class="usefulLinks" >
+		<a href="https://www.masariwallet.com" @click="openExternalLink($event)">WebWallet</a>
+		<a href="https://getmasari.org" @click="openExternalLink($event)">Official Website</a>
+	</div>
+
+	<div class="copyright" >
+		© 2018 <a href="https://getmasari.org" @click="openExternalLink($event)">Masari</a>
+	</div>
+
 </div>
 
-<script src="js/vue.min.js"></script>
-<script src="index.js"></script>
+<script src="lib/biginteger.js"></script>
+<script src="config.js"></script>
+<script src="lib/sha3.js"></script>
+<script src="lib/crypto.js"></script>
+<script src="lib/base58.js"></script>
+<script src="lib/cn_utils.js"></script>
+
+<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+<script src="lib/jquery-3.2.1.min.js"></script>
+<script>if (window.module) module = window.module;</script>
+
+<script src="lib/vue.min.js"></script>
+<script src="lib/sweetalert2.js"></script>
+<script>
+	require('./index.js');
+</script>
 </body>
 </html>
