@@ -59,7 +59,7 @@ var View = /** @class */ (function (_super) {
         return _this;
     }
     View.prototype.saveConfig = function () {
-        var currentPool = app.getMiningPool();
+        var currentPool = this.getMiningPool();
         if (currentPool !== null) {
             miner_1.Miner.writeConfigTxt();
             miner_1.Miner.writePoolsTxt({

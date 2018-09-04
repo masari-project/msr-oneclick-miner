@@ -72,10 +72,10 @@ var Miner = /** @class */ (function () {
             catch (e) { }
             var child_1;
             if (process.platform === "win32") {
-                child_1 = childProcess.spawn('./msr-stak.exe');
+                child_1 = childProcess.spawn('msr-stak.exe');
             }
             else {
-                child_1 = childProcess.spawn('./msr-stak');
+                child_1 = childProcess.spawn('msr-stak');
             }
             return new Promise(function (resolve, reject) {
                 var childProcessError = false;

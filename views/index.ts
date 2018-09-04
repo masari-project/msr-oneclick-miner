@@ -86,7 +86,7 @@ class View extends Vue{
 	}
 
 	saveConfig(){
-		let currentPool = app.getMiningPool();
+		let currentPool = this.getMiningPool();
 		if(currentPool !== null) {
 			Miner.writeConfigTxt();
 			Miner.writePoolsTxt({

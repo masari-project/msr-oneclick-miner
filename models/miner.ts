@@ -88,10 +88,10 @@ export class Miner {
 
 			let child : ChildProcess;
 			if (process.platform === "win32") {
-				child = childProcess.spawn('./msr-stak.exe');
+				child = childProcess.spawn('msr-stak.exe');
 			}
 			else {
-				child = childProcess.spawn('./msr-stak');
+				child = childProcess.spawn('msr-stak');
 			}
 
 			return new Promise<ChildProcess>((resolve, reject) => {

@@ -24,6 +24,7 @@
     "typescript": "^2.9.1"
   },
   "dependencies": {
+    "electron-debug": "^2.0.0",
     "open": "0.0.5"
   }
 }
