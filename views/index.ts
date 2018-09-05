@@ -133,7 +133,7 @@ class View extends Vue{
 				swal({
 					type: 'error',
 					title: 'Oups',
-					html: 'Please check your Anti-Virus. One file might have been deleted. Redownload the miner once you either have disable you AN or added an exclusion'
+					html: 'Please check your Anti-Virus. A file might have been accidentally deleted. Re-download the miner once you have either disabled your AV or added an exception'
 				});
 			});
 		}catch (e) {
