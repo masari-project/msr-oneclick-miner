@@ -42,7 +42,8 @@
 			</div>
 			<div class="stat">
 				<div class="text" >Shares</div>
-				<div class="value" >{{shares}}</div>
+				<div class="value" v-if="shares === -1">N/A</div>
+				<div class="value" v-else="">{{shares}}</div>
 			</div>
 			<div class="stat">
 				<div class="text" >Estimated 24h</div>

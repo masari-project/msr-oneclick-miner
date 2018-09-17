@@ -21,6 +21,7 @@ var miner_1 = require("../models/miner");
 var PoolType;
 (function (PoolType) {
     PoolType[PoolType["snipa22"] = 1] = "snipa22";
+    PoolType[PoolType["dvandal"] = 2] = "dvandal";
 })(PoolType || (PoolType = {}));
 function FormatPiconero(amount) {
     return Math.floor(amount / 1000000000000 * 100) / 100;
@@ -32,7 +33,21 @@ var View = /** @class */ (function (_super) {
         var _this = _super.call(this, vueContructorParams) || this;
         _this.hashrateRefreshInterval = null;
         _this.pools.push({
-            miningAddress: 'pool.masaricoin.com', miningDefaultPort: 3333, staticDiffSeparator: '+', name: 'Masaricoin', websiteUrl: 'https://get.masaricoin.com', apiUrl: 'https://get.masaricoin.com/api/miner/', poolType: PoolType.snipa22
+            miningAddress: 'pool.masaricoin.com',
+            miningDefaultPort: 3333,
+            staticDiffSeparator: '+',
+            name: 'Masaricoin',
+            websiteUrl: 'https://get.masaricoin.com',
+            apiUrl: 'https://get.masaricoin.com/api/miner/',
+            poolType: PoolType.snipa22
+        }, {
+            miningAddress: 'msr.optimusblue.com',
+            miningDefaultPort: 3333,
+            staticDiffSeparator: '.',
+            name: 'OptimusBlue',
+            websiteUrl: 'https://msr.optimusblue.com',
+            apiUrl: 'https://msr.optimusblue.com:8119/',
+            poolType: PoolType.dvandal
         });
         _this.currentPoolMiningAddress = _this.pools[0].miningAddress;
         try {
@@ -82,6 +97,7 @@ var View = /** @class */ (function (_super) {
     };
     View.prototype.currentPoolMiningAddressWatch = function () {
         this.saveConfig();
+        this.retrieveStatsFromPool();
     };
     View.prototype.getEarnings24H = function () {
         if (this.networkHashrate === 0)
@@ -126,7 +142,7 @@ var View = /** @class */ (function (_super) {
     View.prototype.getMiningPool = function () {
         for (var _i = 0, _a = this.pools; _i < _a.length; _i++) {
             var pool = _a[_i];
-            if (pool.miningAddress = this.currentPoolMiningAddress)
+            if (pool.miningAddress === this.currentPoolMiningAddress)
                 return pool;
         }
         return null;
@@ -155,6 +171,21 @@ var View = /** @class */ (function (_super) {
                     _this.shares = apiData.validShares;
                     _this.totalPaid = apiData.amtPaid;
                     _this.amountDue = apiData.amtDue;
+                });
+            }
+            else if (pool.poolType === PoolType.dvandal) {
+                $.ajax({
+                    url: pool.apiUrl + 'stats_address?address=' + this.wallet
+                }).done(function (apiData) {
+                    _this.shares = -1;
+                    if (typeof apiData.stats !== 'undefined') {
+                        _this.totalPaid = typeof apiData.stats.paid !== 'undefined' ? parseFloat('' + apiData.stats.paid) : 0;
+                        _this.amountDue = typeof apiData.stats.balance !== 'undefined' ? parseFloat('' + apiData.stats.balance) : 0;
+                    }
+                    else {
+                        _this.totalPaid = 0;
+                        _this.amountDue = 0;
+                    }
                 });
             }
         }

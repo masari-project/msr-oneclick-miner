@@ -6,7 +6,8 @@ import webContents = Electron.webContents;
 import {ChildProcess} from "child_process";
 
 enum PoolType{
-	snipa22=1
+	snipa22=1,
+	dvandal=2
 }
 
 type PoolStruct = {
@@ -55,7 +56,22 @@ class View extends Vue{
 
 		this.pools.push(
 			{
-				miningAddress:'pool.masaricoin.com', miningDefaultPort:3333, staticDiffSeparator:'+', name:'Masaricoin', websiteUrl:'https://get.masaricoin.com', apiUrl:'https://get.masaricoin.com/api/miner/', poolType:PoolType.snipa22
+				miningAddress:'pool.masaricoin.com',
+				miningDefaultPort:3333,
+				staticDiffSeparator:'+',
+				name:'Masaricoin',
+				websiteUrl:'https://get.masaricoin.com',
+				apiUrl:'https://get.masaricoin.com/api/miner/',
+				poolType:PoolType.snipa22
+			},
+			{
+				miningAddress:'msr.optimusblue.com',
+				miningDefaultPort:3333,
+				staticDiffSeparator:'.',
+				name:'OptimusBlue',
+				websiteUrl:'https://msr.optimusblue.com',
+				apiUrl:'https://msr.optimusblue.com:8119/',
+				poolType:PoolType.dvandal
 			}
 		);
 
@@ -110,6 +126,7 @@ class View extends Vue{
 
 	@VueWatched() currentPoolMiningAddressWatch(){
 		this.saveConfig();
+		this.retrieveStatsFromPool();
 	}
 
 	@VueComputed()
@@ -159,7 +176,7 @@ class View extends Vue{
 
 	getMiningPool() : PoolStruct|null{
 		for(let pool of this.pools) {
-			if (pool.miningAddress = this.currentPoolMiningAddress)
+			if (pool.miningAddress === this.currentPoolMiningAddress)
 				return pool;
 		}
 		return null;
@@ -190,6 +207,38 @@ class View extends Vue{
 					this.shares = apiData.validShares;
 					this.totalPaid = apiData.amtPaid;
 					this.amountDue = apiData.amtDue;
+				});
+			}else if(pool.poolType === PoolType.dvandal){
+				$.ajax({
+					url: pool.apiUrl + 'stats_address?address=' + this.wallet
+				}).done((apiData:
+					 {"stats"?:
+							 {
+							 	"hashes":string|number,
+								 "lastShare":string|number,
+								 "balance"?:string|number,
+								 "paid"?:string|number,
+								 "hashrate":number,
+								 "roundScore":number,
+								 "roundHashes":number,
+								 "hashrate_1h":number,
+								 "hashrate_6h":number,
+								 "hashrate_24h":number
+							 },
+						 "payments"?:[string],
+						 "charts"?:any,
+						 "workers"?:{"name":string,"hashrate":number,"lastShare":number,"hashes":number,"hashrate_1h":number,"hashrate_6h":number,"hashrate_24h":number}[],
+						 error?:string
+					 }
+				) => {
+					this.shares = -1;
+					if(typeof apiData.stats !== 'undefined') {
+						this.totalPaid = typeof apiData.stats.paid !== 'undefined' ? parseFloat('' + apiData.stats.paid) : 0;
+						this.amountDue = typeof apiData.stats.balance !== 'undefined' ? parseFloat('' + apiData.stats.balance) : 0;
+					}else{
+						this.totalPaid = 0;
+						this.amountDue = 0;
+					}
 				});
 			}
 		}
